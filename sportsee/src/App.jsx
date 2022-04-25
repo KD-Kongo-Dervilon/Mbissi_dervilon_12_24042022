@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./styles/app.scss";
 import NavigationHorizontale from './components/NavigationHorizontale';
 import NavigationVerticale from './components/NavigationVerticale';
@@ -15,12 +15,14 @@ import Dashboard from './pages/Dashboard';
  */
 
 const App = () => {
+  const [userId, setUserId] = useState(12);
+
   return (
     <div className="App">
-      <NavigationHorizontale />
+      <NavigationHorizontale  currentUser={[userId, setUserId]} />
       <div className="app-content">
         <NavigationVerticale />
-        <Dashboard />
+        <Dashboard userId={userId} />
       </div>
     </div>
   );
