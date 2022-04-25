@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes, { objectOf } from "prop-types";
+import PropTypes from "prop-types";
 import getData from '../../getData/getData';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, } from "recharts";
 
@@ -9,7 +9,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
  * @returns A bar chart with two y-axes.
  */
 
-const Weight = ({ userId }) => {
+const Weight = ({ userId, color  }) => {
     const [data, setData] = useState();
 	const dates = data?.map((d) => d.day.split("-")[2]);
 
@@ -42,7 +42,21 @@ const Weight = ({ userId }) => {
 			calories: "Calories brûlées (kCal)",
 		};
 		return (
-			<span className="recharts-legend-item-text dark_grey">{types[text]}</span>
+			<span>
+				<span
+					style={{
+						position: "absolute",
+						left: "0",
+						fontSize: "18px",
+						color: color.dark_grey,
+					}}
+				>
+					Activité quotidienne
+				</span>
+					<span className="recharts-legend-item-text dark_grey">
+					{types[text]}
+				</span>
+			</span>
 		);
 	}
 
@@ -60,11 +74,12 @@ const Weight = ({ userId }) => {
 	function CustomTooltip({ active, payload, label }) {
 		if (active && payload && payload.length) {
 			return (
-				<div className="custom-tooltip"
-					style={{background: color.red, padding: '10px 5px', color: 'white'}}
+				<div
+					className="custom-tooltip"
+					style={{ background: color.red, padding: "10px 5px", color: "white" }}
 				>
-					<p className="desc">{payload[0].payload.kilogram}Kg</p>
-					<p className="desc">{payload[1].payload.calories}kCal</p>
+					<p className="desc">{payload[0].payload.kilogram} Kg</p>
+					<p className="desc">{payload[1].payload.calories} kCal</p>
 				</div>
 			);
 
@@ -72,12 +87,9 @@ const Weight = ({ userId }) => {
 		return <div>rien</div>
 	}
 
-	const color = {
-		red: "#f00",
-		light_grey: "#fbfbfb",
-		grey: "#979797",
-		dark_grey: "#282d30",
-	};
+	function Title() {
+		return <span className="Title_text">Activité quotidienne</span>;
+	}
 
 	return (
 		<div className="Weight">
@@ -101,6 +113,7 @@ const Weight = ({ userId }) => {
 							tickFormatter={formatDate}
 							tickLine={false}
 							tickMargin={15}
+							// label={{ value: 'random text', position: 'outsideTopLeft' }}
 						/>
 
 						<YAxis
@@ -118,17 +131,15 @@ const Weight = ({ userId }) => {
 							domain={["dataMin - 50", "dataMax + 50"]}
 							hide
 						/>
-						<Tooltip
-							content={<CustomTooltip />}
-							active
-						/>
 						<Legend
 							verticalAlign="top"
 							align="right"
 							iconType="circle"
-							iconSize={7}
+							iconSize={8}
 							formatter={setLegend}
 						/>
+						<Tooltip content={<CustomTooltip />}
+							animationEasing="ease-out" active />
 						<Bar
 							yAxisId="kilogram"
 							dataKey="kilogram"
@@ -138,7 +149,7 @@ const Weight = ({ userId }) => {
 						<Bar
 							yAxisId="calories"
 							dataKey="calories"
-							radius={[10, 10, 0, 0]}
+							radius={[20, 20, 0, 0]}
 							fill={color.red}
 						/>
 					</BarChart>
