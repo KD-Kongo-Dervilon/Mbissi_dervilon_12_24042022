@@ -4,13 +4,13 @@ import PropTypes from "prop-types";
 const Score = ({ data }) => {
     return (
         <div className="score">
-            SCORE: {data}
+            SCORE:
         </div>
     );
 };
 
 export default Score;
 
-Score.prototype = {
+Score.proptype = {
 	data: PropTypes.number.isRequired,
 };

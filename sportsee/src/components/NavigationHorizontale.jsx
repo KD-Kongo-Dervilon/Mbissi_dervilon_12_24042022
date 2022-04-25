@@ -44,6 +44,6 @@ const NavigationHorizontale = ({ currentUser }) => {
 
 export default NavigationHorizontale;
 
-NavigationHorizontale.prototype = {
+NavigationHorizontale.proptype = {
     currentUser: PropTypes.arrayOf([PropTypes.number, PropTypes.func])
 }

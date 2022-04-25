@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-const Counter = ({ data }) => {
+const Counter = ({ data, i }) => {
     const [type, value] = data
 
 	const types = {
@@ -14,7 +14,7 @@ const Counter = ({ data }) => {
     const title = types[type]
 
     return (
-        <div className="counter">
+        <div className={`Counter Counter-${i}`}>
             {title} : {value}
         </div>
     );
@@ -22,6 +22,6 @@ const Counter = ({ data }) => {
 
 export default Counter;
 
-Counter.prototype = {
+Counter.proptype  = {
 	data: PropTypes.array.isRequired,
 }; 
