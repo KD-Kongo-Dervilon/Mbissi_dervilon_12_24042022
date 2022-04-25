@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-const Header = ({ firstname }) => {
-    useEffect(() => console.log("firstname", firstname), [firstname]); 
+const Header = ({ firstname }) => { 
 
     return (
         <div className="header">
-            <h1>Bonjour <span className="name">{firstname}</span></h1>
+            <h1>Bonjour <span className="name" data-testid="firstname">{firstname}</span></h1>
 			<p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
         </div>
     );
