@@ -1,12 +1,13 @@
-import React, { Fragment ,useEffect, useState } from 'react';
-import Header from '../components/dashboard/Header';
-import Weight from '../components/dashboard/Weight';
-import Duration from '../components/dashboard/Duration';
-import RadarGraph from '../components/dashboard/RadarGraph';
-import Score from '../components/dashboard/Score';
-import Counter from '../components/dashboard/Counter';
-import getData from '../getData/getData';
+import Header from "../components/dashboard/Header";
+import Weight from "../components/dashboard/Weight";
+import Duration from "../components/dashboard/Duration";
+import RadarGraph from "../components/dashboard/RadarGraph";
+import Score from "../components/dashboard/Score";
+import Counter from "../components/dashboard/Counter";
+import getData from "../getData/getData";
+
 import PropTypes from "prop-types";
+import { Fragment, useEffect, useState } from "react";
 
 /**
  * This function renders the dashboard.
@@ -15,12 +16,13 @@ import PropTypes from "prop-types";
  */
 
 
-const Dashboard = ({ userId }) => {
-    // {mainData: array} - Array of objects about the main's user informations.
+function Dashboard({ userId }) {
+	// {mainData: array} - Array of objects about the main's user informations.
 	const [mainData, setMainData] = useState();
 	const score = mainData?.todayScore || mainData?.score;
 
-    // mainData are fetched on each userId change.
+
+	// mainData are fetched on each userId change.
 	useEffect(() => {
 		async function get() {
 			const response = await getData("USER_MAIN_DATA", userId);
@@ -28,6 +30,7 @@ const Dashboard = ({ userId }) => {
 		}
 		get();
 	}, [userId]);
+
 
 	// Global variables for colors
 	const color = {
@@ -37,8 +40,9 @@ const Dashboard = ({ userId }) => {
 		grey: "#979797",
 		dark_grey: "#282d30",
 	};
+    
 
-    return (
+	return (
 		<div className="Dashboard">
 			{mainData && (
 				<Fragment>
@@ -61,7 +65,7 @@ const Dashboard = ({ userId }) => {
 			)}
 		</div>
 	);
-};
+}
 
 export default Dashboard;
 

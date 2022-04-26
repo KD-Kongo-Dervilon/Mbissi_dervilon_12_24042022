@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import getData from "../../getData/getData";
 import PropTypes from "prop-types";
-import { RadarChart, Radar, PolarAngleAxis, PolarRadiusAxis, PolarGrid, Tooltip, Legend, ResponsiveContainer, } from "recharts";
-import getData from '../../getData/getData';
+import { useEffect, useState } from "react";
+import { RadarChart, Radar, PolarAngleAxis, PolarRadiusAxis, PolarGrid, Tooltip, ResponsiveContainer, } from "recharts";
 
 /**
  * This function is used to display a radar.
@@ -10,15 +10,14 @@ import getData from '../../getData/getData';
  * @returns A radar  graphic with multiple axes.
  */
 
-const RadarGraph = ({ userId, color }) => {
-    const [data, setData] = useState();
+function RadarGraph({ userId, color }) {
+	const [data, setData] = useState();
 	const kind = data?.kind;
 	const values = data?.data;
 	let modelData = values?.map((val, index) => {
 		return { key: kind[index + 1], value: val.value };
 	});
 	modelData = modelData?.reverse();
-
 
 	// data are fetched on each userId change.
 	useEffect(() => {
@@ -45,13 +44,11 @@ const RadarGraph = ({ userId, color }) => {
 	 * @returns A text element with the name of the value with the right y value & textAnchor value.
 	 */
 
-
-
 	function setTick(props) {
 		const { payload, x, y } = props;
 		const value = payload.value;
 		const side = payload.coordinate;
-		
+
 		return (
 			<text
 				x={x}
@@ -80,7 +77,8 @@ const RadarGraph = ({ userId, color }) => {
 	 * color: red.
 	 */
 
-    function CustomTooltip({ active, payload }) {
+    
+	function CustomTooltip({ active, payload }) {
 		if (active && payload && payload.length) {
 			return (
 				<div

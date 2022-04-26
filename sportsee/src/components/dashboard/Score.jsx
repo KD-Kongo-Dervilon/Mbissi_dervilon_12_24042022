@@ -1,6 +1,5 @@
-import React from 'react';
 import PropTypes from "prop-types";
-import { PieChart, Pie, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Legend, ResponsiveContainer } from "recharts";
 
 /**
  * This function is used to display the score of the user.
@@ -9,17 +8,18 @@ import { PieChart, Pie, Tooltip, Legend, ResponsiveContainer } from "recharts";
  * @returns A partial donut with the user's score.
  */
 
-const Score = ({ userScore, color }) => {
-    // Build modelData with the score of the user & (1 - userScore)
+
+function Score({ userScore, color }) {
+	// Build modelData with the score of the user & (1 - userScore)
 	const modelData = [
-		{ name: "score", value: 1 - userScore, stroke: 'transparent' },
+		{ name: "score", value: 1 - userScore, stroke: 'white' },
 		{ name: "score", value: userScore, stroke: 'red' },
 	];
 
 	return (
 		<div className="Score">
 			<ResponsiveContainer width="100%" height="100%">
-				<PieChart margin={{ top: 10, bottom: 10 }}>
+				<PieChart margin={{ top: 10, bottom: 0 }}>
 					<text
 						dy="50%"
 						dx="50%"

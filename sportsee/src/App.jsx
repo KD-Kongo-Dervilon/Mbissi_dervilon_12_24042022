@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import "./styles/app.scss";
-import NavigationHorizontale from './components/NavigationHorizontale';
-import NavigationVerticale from './components/NavigationVerticale';
-import Dashboard from './pages/Dashboard';
+import "./styles/App.scss";
+import { useState } from "react";
+import Dashboard from "./pages/Dashboard";
+import NavH from "./components/NavH";
+import NavV from "./components/NavV";
 
 
 /**
@@ -14,19 +14,19 @@ import Dashboard from './pages/Dashboard';
  * @returns The global interface of SportSee Dashboard
  */
 
-const App = () => {
-  // Default userId set to 12
+function App() {
+	// Default userId set to 12
 	const [userId, setUserId] = useState(12);
 
-  return (
+	return (
 		<div className="App">
-			<NavigationHorizontale currentUser={[userId, setUserId]} />
+			<NavH currentUser={[userId, setUserId]} />
 			<div className="app-content">
-				<NavigationVerticale />
+				<NavV />
 				<Dashboard userId={userId} />
 			</div>
 		</div>
 	);
-};
+}
 
 export default App;

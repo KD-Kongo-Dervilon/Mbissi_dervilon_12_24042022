@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from "prop-types";
 import apple from "../../assets/apple.svg";
 import cheeseburger from "../../assets/cheeseburger.svg";
@@ -16,7 +15,8 @@ import energy from "../../assets/energy.svg";
  * 		- A p with the title of the counter
  */
 
-const Counter = ({ data, i }) => {
+
+function Counter({ data, i }) {
 	let [type, value] = data;
 	value = +value > 999 ? `${Math.floor(value / 1000)},${value - 1000}` : value;
 

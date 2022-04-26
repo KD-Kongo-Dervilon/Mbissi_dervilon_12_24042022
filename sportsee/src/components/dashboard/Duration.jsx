@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import getData from "../../getData/getData";
 import PropTypes from "prop-types";
-import getData from '../../getData/getData';
+import { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Rectangle, } from "recharts";
 
 /**
@@ -10,8 +10,9 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
  * @returns A curved line showing the evolution of user's activity through the week.
  */
 
-const Duration = ({  userId, color }) => {
-    const [data, setData] = useState();
+
+function Duration({ userId, color }) {
+	const [data, setData] = useState();
 
 	// data are fetched on each userId change.
 	useEffect(() => {
@@ -29,25 +30,26 @@ const Duration = ({  userId, color }) => {
 	 * @returns The letter day of the week.
 	 */
 
+
 	function weekDays(num) {
 		const week = ["L", "M", "M", "J", "V", "S", "D"];
 		return week[+num - 1];
 	}
 
-		/**
+	/**
 	 * This function is a React component that builds a custom Tooltip.
 	 * @param {array} payload - Array of objects feeding the Tooltip.
 	 * @returns A div with a class of custom-tooltip and a style of background: white and padding: 1px
 	 * 5px.
 	 */
 
+
 	function CustomTooltip({ payload }) {
 		if (payload && payload.length) {
-			// console.log(payload);
 			return (
 				<div
-					className="custom-tooltip"
-					style={{ background: "white", padding: "1px 5px" }}
+				className="custom-tooltip"
+				style={{ background: "white", padding: "1px 5px" }}
 				>
 					<p className="desc">{payload[0].payload.sessionLength} min</p>
 				</div>
@@ -62,6 +64,7 @@ const Duration = ({  userId, color }) => {
 	 * @returns A custom cursor.
 	 */
 
+	
 	function CustomCursor(props) {
 		if (props) {
 			const { points, width, height } = props;
@@ -89,8 +92,8 @@ const Duration = ({  userId, color }) => {
 						data={data}
 						margin={{
 							top: 30,
-							right: 0,
-							left: 0,
+							right: 2,
+							left: 2,
 							bottom: 30,
 						}}
 					>

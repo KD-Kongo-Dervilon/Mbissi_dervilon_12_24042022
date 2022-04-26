@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from "prop-types";
 
 /**
@@ -7,15 +6,15 @@ import PropTypes from "prop-types";
  * @returns A div with a h1 and a p.
  */
 
-const Header = ({ firstname }) => { 
 
-    return (
-        <div className="header">
-            <h1>Bonjour <span className="name" data-testid="firstname">{firstname}</span></h1>
-			<p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
-        </div>
-    );
-};
+function Header({ firstname }) {
+	return (
+		<div className="Header">
+			<h1>Bonjour <span className="name" data-testid="firstname">{firstname}</span></h1>
+			<p>Félicitations! Vous avez explosé vos objectifs hier 👏</p>
+		</div>
+	);
+}
 
 export default Header;
 

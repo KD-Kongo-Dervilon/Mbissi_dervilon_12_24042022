@@ -1,6 +1,6 @@
-import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE } from "../mocks/data";
-import PropTypes from "prop-types";
-import axios from "axios";
+import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE } from "../mock/data";
+import PropTypes from "prop-types"
+import axios from "axios"
 
 /**
  * It fetches data either from the mockedData or the API and returns it.
@@ -10,7 +10,6 @@ import axios from "axios";
  * @access localStorage - Fetched data are stored in localStorage to provide better access for next time
  * @returns The data for the user.
  */
-
 async function getData(requestTarget, userId) {
     const mockedEnv = process.env.REACT_APP_MOCKED_DATA
     const mockedData = {
@@ -19,14 +18,9 @@ async function getData(requestTarget, userId) {
         USER_AVERAGE_SESSIONS: USER_AVERAGE_SESSIONS,
         USER_PERFORMANCE: USER_PERFORMANCE
     }
-
-    // API URL = API_URL=http://localhost:3000
-    // @returns The URL part of the API target.
     const apiURL = process.env[`REACT_APP_API_URL`]
     const apiTarget = process.env[`REACT_APP_${requestTarget}`].replace(/userId/, userId)
     let usersData, data
-    console.log(`Data is taken from ${mockedEnv === "true" ? "MOCKED_DATA" : "BackEnd database with Axios" }.`)
-
 
     try {
         if (localStorage.getItem(`sportSee-${userId}-${requestTarget}`)) {

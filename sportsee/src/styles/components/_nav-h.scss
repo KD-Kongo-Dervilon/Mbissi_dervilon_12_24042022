@@ -10,14 +10,21 @@
         height: 60%;
         padding: 20px;
     }
+    .logo_link{
+        height: 110%;
+        padding: 20px;
+    }
     .nav-h {
         display: flex;
         justify-content: space-around;
         flex: 1;
 
         .nav-h_menu {
-            font-size: 2vw;
+            text-decoration: none;
+            color: white;
+            font-size: 1.7vw;
             font-weight: 500;
+            list-style: none;
             &:hover {
                 @include btn_text_over;
             }

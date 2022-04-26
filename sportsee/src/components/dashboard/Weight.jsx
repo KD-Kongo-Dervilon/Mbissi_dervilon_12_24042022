@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import getData from "../../getData/getData";
 import PropTypes from "prop-types";
-import getData from '../../getData/getData';
+import { useEffect, useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, } from "recharts";
-
 
 /**
  * This function is used to display the weight of the user.
@@ -11,10 +10,11 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
  * @returns A bar chart with two y-axes.
  */
 
-const Weight = ({ userId, color  }) => {
-    const [data, setData] = useState();
+function Weight({ userId, color }) {
+	const [data, setData] = useState();
 	// get day from date
 	const dates = data?.map((d) => d.day.split("-")[2]);
+
 
 	// data are fetched on each userId change.
 	useEffect(() => {
@@ -25,12 +25,12 @@ const Weight = ({ userId, color  }) => {
 		get();
 	}, [userId]);
 
-
-    /**
+	/**
 	 * Given a date in the format YYYY-MM-DD, return the day of the month
 	 * @param {string} date
 	 * @returns The day of the month.
 	 */
+
 
 	function formatDate(date) {
 		let res = date.split("-")[2];
@@ -43,6 +43,7 @@ const Weight = ({ userId, color  }) => {
 	 * @param {string} text - Payload text from <Legend />
 	 * @returns A span element with the text "Poids (kg)" or "Calories (kCal)"
 	 */
+
 
 	function setLegend(text) {
 		const types = {
@@ -61,7 +62,7 @@ const Weight = ({ userId, color  }) => {
 				>
 					Activité quotidienne
 				</span>
-					<span className="recharts-legend-item-text dark_grey">
+				<span className="recharts-legend-item-text dark_grey">
 					{types[text]}
 				</span>
 			</span>
@@ -79,6 +80,7 @@ const Weight = ({ userId, color  }) => {
 	 * @returns A div with two p tags.
 	 */
 
+    
 	function CustomTooltip({ active, payload }) {
 		if (active && payload && payload.length) {
 			return (
