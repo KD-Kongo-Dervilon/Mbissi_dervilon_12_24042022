@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/Mbissi_dervilon_12_24042022/static/css/main.dc8917c2.css",
+    "main.js": "/Mbissi_dervilon_12_24042022/static/js/main.50f05edb.js",
+    "static/media/logo.png": "/Mbissi_dervilon_12_24042022/static/media/logo.231a6da56bd8a5133afa.png",
+    "static/media/apple.svg": "/Mbissi_dervilon_12_24042022/static/media/apple.95581ba1b204199334e122af4784ab16.svg",
+    "index.html": "/Mbissi_dervilon_12_24042022/index.html",
+    "static/media/chicken.svg": "/Mbissi_dervilon_12_24042022/static/media/chicken.ffbc3b88a759c706993bb26fbd66113b.svg",
+    "static/media/cheeseburger.svg": "/Mbissi_dervilon_12_24042022/static/media/cheeseburger.18f60e0efe37e86bcac036d673f0bab0.svg",
+    "static/media/energy.svg": "/Mbissi_dervilon_12_24042022/static/media/energy.25fef86ed5860200bdf90f9cd185e1e3.svg",
+    "main.dc8917c2.css.map": "/Mbissi_dervilon_12_24042022/static/css/main.dc8917c2.css.map",
+    "main.50f05edb.js.map": "/Mbissi_dervilon_12_24042022/static/js/main.50f05edb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dc8917c2.css",
+    "static/js/main.50f05edb.js"
+  ]
+}
