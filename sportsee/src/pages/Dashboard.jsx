@@ -37,7 +37,7 @@ const Dashboard = ({ userId }) => {
             <Weight userId={userId} />
 				<Duration userId={userId} />
 				<RadarComp userId={userId} color={color} />
-				<Score data={mainData?.todayScore} />
+				<Score data={mainData?.todayScore || mainData?.score} color={color} />
 				<Weight userId={userId} color={color} />
 				<Duration userId={userId} color={color} />
 				<Radar userId={userId} color={color} />

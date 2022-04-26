@@ -44,10 +44,10 @@ const Weight = ({ userId, color  }) => {
 		return (
 			<span>
 				<span
+					className="legend_text"
 					style={{
 						position: "absolute",
 						left: "0",
-						fontSize: "1.4vw",
 						color: color.dark_grey,
 					}}
 				>
@@ -138,8 +138,11 @@ const Weight = ({ userId, color  }) => {
 							iconSize={8}
 							formatter={setLegend}
 						/>
-						<Tooltip content={<CustomTooltip />}
-							animationEasing="ease-out" active />
+						<Tooltip
+							content={<CustomTooltip />}
+							animationEasing="ease-out"
+							active
+						/>
 						<Bar
 							yAxisId="kilogram"
 							dataKey="kilogram"

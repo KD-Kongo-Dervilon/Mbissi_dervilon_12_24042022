@@ -9,11 +9,15 @@ h1 {
     margin-top: 0;
 	font-size: 48px;
 	font-weight: 500;
-	.name {
+	    .name {
 		color: $red;
-	}
+	    }
+    } 
 }
 
+.legend_text {
+	font-size: 1.2vw;
+	font-weight: 400;
 }
 
 .dashboard_graphs {
@@ -52,13 +56,15 @@ h1 {
 
 .Score {
     grid-column: 3/4;
-    grid-row: 3/5;
-}
-
-.Score {
-    grid-column: 3/4;
 	grid-row: 3/5;
 	background-color: $light_grey;
+	.recharts-sector {
+		stroke-linejoin: round;
+		stroke-width: 7px;
+	}
+	.recharts-surface > text {
+		font-size: 1vw;
+	}
 }
 
 .Counter {
