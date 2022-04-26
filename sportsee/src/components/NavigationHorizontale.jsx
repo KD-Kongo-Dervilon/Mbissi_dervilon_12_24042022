@@ -4,14 +4,16 @@ import PropTypes from "prop-types"
 import { Link, NavLink } from 'react-router-dom';
 
 /**
- * This function returns a div with a logo and a nav-h
- * @function onclick - Logo click switch between 2 mocked user.
+ * This function returns a div with a logo and horizontal navigation.
+ * @param {array} currentUser - Props containing userId state & setUserId setter.
+ * @function onclick - Logo click switch between 2 mocked users.
  * @returns A div with a logo and a nav-h.
  */
 
 const NavigationHorizontale = ({ currentUser }) => {
     const [userId, setUserId] = currentUser
-    const ids = [12, 18]
+    // Available users userId
+    const ids = [12, 18];
 
 
     return (
@@ -22,6 +24,7 @@ const NavigationHorizontale = ({ currentUser }) => {
             onClick={() => setUserId(ids.filter(id => id !== userId)[0])}
             src={logo}
             alt="SportSee logo"
+            title="Click to switch demo User"
         />
         </Link>
             <ul className="nav-h">
@@ -44,6 +47,8 @@ const NavigationHorizontale = ({ currentUser }) => {
 
 export default NavigationHorizontale;
 
-NavigationHorizontale.proptype = {
-    currentUser: PropTypes.arrayOf([PropTypes.number, PropTypes.func])
-}
+NavigationHorizontale.propTypes = {
+	currentUser: PropTypes.arrayOf(
+		PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
+	),
+};

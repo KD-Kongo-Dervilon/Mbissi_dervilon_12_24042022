@@ -15,17 +15,18 @@ import Dashboard from './pages/Dashboard';
  */
 
 const App = () => {
-  const [userId, setUserId] = useState(12);
+  // Default userId set to 12
+	const [userId, setUserId] = useState(12);
 
   return (
-    <div className="App">
-      <NavigationHorizontale  currentUser={[userId, setUserId]} />
-      <div className="app-content">
-        <NavigationVerticale />
-        <Dashboard userId={userId} />
-      </div>
-    </div>
-  );
+		<div className="App">
+			<NavigationHorizontale currentUser={[userId, setUserId]} />
+			<div className="app-content">
+				<NavigationVerticale />
+				<Dashboard userId={userId} />
+			</div>
+		</div>
+	);
 };
 
 export default App;

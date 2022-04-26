@@ -5,14 +5,13 @@ import axios from "axios";
 /**
  * It fetches data either from the mockedData or the API and returns it.
  * @modify .env - Set MOCKED_DATA to 'true' || 'false' in order to use mockedData or Axios requests
- * @param requestTarget - The name of the type of data you want to request from the API.
- * @param userId - The user ID of the user you want to get data for.
+ * @param {string} requestTarget - The name of the type of data you want to request from the API.
+ * @param {number} userId - The user ID of the user you want to get data for.
  * @access localStorage - Fetched data are stored in localStorage to provide better access for next time
  * @returns The data for the user.
  */
 
 async function getData(requestTarget, userId) {
-    // MOCKED_DATA=true
     const mockedEnv = process.env.REACT_APP_MOCKED_DATA
     const mockedData = {
         USER_MAIN_DATA: USER_MAIN_DATA,
@@ -54,17 +53,18 @@ async function getData(requestTarget, userId) {
                 }
             }
         }
-
-    return data
+        return data
     } catch (error) {
         console.log('Erreur de récupération des données utilisateur:', error)
         alert('Une erreur est survenue: Utilisateur non reconnu.')
     }
+
 }
 
 export default getData;
 
+
 getData.proptype = {
     requestTarget: PropTypes.oneOf(['USER_MAIN_DATA', 'USER_ACTIVITY', 'USER_AVERAGE_SESSIONS', 'USER_PERFORMANCE']).isRequired,
     userId: PropTypes.number.isRequired,
-} 
+}

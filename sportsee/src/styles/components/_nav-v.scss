@@ -1,25 +1,30 @@
 .Nav-v {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    flex-wrap: wrap;
-	width: 120px;
-    height: auto;
+	width: 20vw;
+    max-width: 100px;
     color: white;
 	background-color: black;
 }
 .nav-v_btns {
-    margin-top: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-end;
+    padding-top: 10%;
     align-items: center;
 	.nav-v_btns_btn {
+        display: block;
         margin: 10px;
-		width: 60px;
-		height: 60px;
-		border-radius: 10px;
+		width: 70%;
+		height: 0;
+        padding-bottom: 70%;
+		border-radius: 5%;
 		background-color: white;
+        img {
+            margin: 10%;
+            width: 80%;
+        }
         &:hover img {
             @include btn_over;
         }

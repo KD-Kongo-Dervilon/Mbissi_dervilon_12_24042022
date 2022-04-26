@@ -4,7 +4,7 @@ $blue: #4ab8ff;
 $yellow: #fdcc0c;
 $pink: #fd5181;
 $dark_red: #da0000;
-$light_grey: #fbfbfb;
+$light_grey: #f4f4f4;
 $grey: #979797;
 $dark_grey: #282d30;
 
@@ -23,7 +23,6 @@ $dark_grey: #282d30;
 	transition: 0.3s;
 	box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
 }
-
 @mixin btn_text_over() {
 	cursor: pointer;
 	transform: scale(1.1);

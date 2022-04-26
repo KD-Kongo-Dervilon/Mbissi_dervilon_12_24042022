@@ -1,27 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment ,useEffect, useState } from 'react';
 import Header from '../components/dashboard/Header';
-import Radar from '../components/dashboard/Radar';
-import Score from '../components/dashboard/Score';
-import Counter from '../components/dashboard/Counter';
-import PropTypes from "prop-types";
-import getData from '../getData/getData';
 import Weight from '../components/dashboard/Weight';
 import Duration from '../components/dashboard/Duration';
-import RadarComp from '../components/dashboard/RadarComp';
+import RadarGraph from '../components/dashboard/RadarGraph';
+import Score from '../components/dashboard/Score';
+import Counter from '../components/dashboard/Counter';
+import getData from '../getData/getData';
+import PropTypes from "prop-types";
 
+/**
+ * This function renders the dashboard.
+ * @param {number} userId - The id number of current user.
+ * @returns The Dashboard component is returning a div element with all the graphics.
+ */
 
 
 const Dashboard = ({ userId }) => {
-    const [mainData, setMainData] = useState();
+    // {mainData: array} - Array of objects about the main's user informations.
+	const [mainData, setMainData] = useState();
+	const score = mainData?.todayScore || mainData?.score;
 
-    useEffect(() => {
+    // mainData are fetched on each userId change.
+	useEffect(() => {
 		async function get() {
 			const response = await getData("USER_MAIN_DATA", userId);
 			setMainData(response.data);
 		}
 		get();
-    }, [userId]);
+	}, [userId]);
 
+	// Global variables for colors
 	const color = {
 		red: "#f00",
 		dark_red: "#da0000",
@@ -31,28 +39,32 @@ const Dashboard = ({ userId }) => {
 	};
 
     return (
-        <div className="Dashboard">
-            <Header firstname={mainData?.userInfos.firstName} />
-            <div className="dashboard_graphs">
-            <Weight userId={userId} />
-				<Duration userId={userId} />
-				<RadarComp userId={userId} color={color} />
-				<Score data={mainData?.todayScore || mainData?.score} color={color} />
-				<Weight userId={userId} color={color} />
-				<Duration userId={userId} color={color} />
-				<Radar userId={userId} color={color} />
-				<Score data={mainData?.todayScore} color={color} />
-				{mainData &&
-					Object.keys(mainData.keyData).map((val, i) => (
-					<Counter data={[val, mainData.keyData[val]]} color={color} i={i} key={`counter-${i}`} />
-				))}
-            </div>
-        </div>
-    );
+		<div className="Dashboard">
+			{mainData && (
+				<Fragment>
+					<Header firstname={mainData.userInfos.firstName} />
+					<div className="dashboard_graphs">
+						<Weight userId={userId} color={color} />
+						<Duration userId={userId} color={color} />
+						<RadarGraph userId={userId} color={color} />
+						<Score userScore={score} color={color} />
+						{Object.keys(mainData.keyData).map((val, i) => (
+							<Counter
+								data={[val, mainData.keyData[val]]}
+								color={color}
+								i={`counter-${i}`}
+								key={`counter-${i}`}
+							/>
+						))}
+					</div>
+				</Fragment>
+			)}
+		</div>
+	);
 };
 
 export default Dashboard;
 
-Dashboard.proptype = {
-	userId: PropTypes.number,
+Dashboard.propTypes = {
+	userId: PropTypes.number.isRequired,
 };

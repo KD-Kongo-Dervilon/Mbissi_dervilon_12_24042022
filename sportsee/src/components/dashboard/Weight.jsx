@@ -5,14 +5,18 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 
 
 /**
- * This function is used to display the weight of the user
+ * This function is used to display the weight of the user.
+ * @param {number} userId - Id number of a registered user.
+ * @param {string} color - Colors from dashboard.
  * @returns A bar chart with two y-axes.
  */
 
 const Weight = ({ userId, color  }) => {
     const [data, setData] = useState();
+	// get day from date
 	const dates = data?.map((d) => d.day.split("-")[2]);
 
+	// data are fetched on each userId change.
 	useEffect(() => {
 		async function get() {
 			const response = await getData("USER_ACTIVITY", userId);
@@ -21,10 +25,13 @@ const Weight = ({ userId, color  }) => {
 		get();
 	}, [userId]);
 
+
     /**
 	 * Given a date in the format YYYY-MM-DD, return the day of the month
+	 * @param {string} date
 	 * @returns The day of the month.
 	 */
+
 	function formatDate(date) {
 		let res = date.split("-")[2];
 		res = res[0] === "0" ? res[1] : res;
@@ -33,6 +40,7 @@ const Weight = ({ userId, color  }) => {
 
 	/**
 	 * This function takes in a string and returns a span element with the string as its text
+	 * @param {string} text - Payload text from <Legend />
 	 * @returns A span element with the text "Poids (kg)" or "Calories (kCal)"
 	 */
 
@@ -63,32 +71,27 @@ const Weight = ({ userId, color  }) => {
 	/**
 	 * The CustomTooltip function is a React component that takes in an active prop, payload prop, and label prop.
 	 *
-	 * The active prop is a boolean that tells the component whether or not the tooltip is active.
+	 * @param {boolean} active - The active prop is a boolean from <Tooltip /> that tells the component whether or not the tooltip is active.
 	 *
-	 * The payload prop is an array of objects that contain the data that the tooltip needs to display.
+	 * @param {array} payload - The payload prop is an array of objects from <Tooltip /> that contain the data that the tooltip needs to display.
 	 *
 	 * The label prop is a string that tells the component what label to display.
 	 * @returns A div with two p tags.
 	 */
 
-	function CustomTooltip({ active, payload, label }) {
+	function CustomTooltip({ active, payload }) {
 		if (active && payload && payload.length) {
 			return (
 				<div
 					className="custom-tooltip"
-					style={{ background: color.red, padding: "10px 5px", color: "white" }}
+					style={{ background: color.red, padding: "5px 5px", color: "white" }}
 				>
 					<p className="desc">{payload[0].payload.kilogram} Kg</p>
 					<p className="desc">{payload[1].payload.calories} kCal</p>
 				</div>
 			);
-
 		}
-		return <div>rien</div>
-	}
-
-	function Title() {
-		return <span className="Title_text">Activité quotidienne</span>;
+		return <div>... waiting for data</div>;
 	}
 
 	return (
@@ -115,7 +118,6 @@ const Weight = ({ userId, color  }) => {
 							tickMargin={15}
 							// label={{ value: 'random text', position: 'outsideTopLeft' }}
 						/>
-
 						<YAxis
 							yAxisId="kilogram"
 							type="number"
@@ -164,7 +166,7 @@ const Weight = ({ userId, color  }) => {
 
 export default Weight;
 
-
-Weight.proptype = {
+Weight.propTypes = {
 	userId: PropTypes.number.isRequired,
+	color: PropTypes.object.isRequired
 };

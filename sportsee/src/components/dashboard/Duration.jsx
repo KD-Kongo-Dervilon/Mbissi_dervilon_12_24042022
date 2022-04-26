@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from "prop-types";
 import getData from '../../getData/getData';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ComposedChart, Bar, Rectangle, } from "recharts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Rectangle, } from "recharts";
 
+/**
+ * This function is used to display the duration of dayly exercices.
+ * @param {number} userId - Id number of a registered user.
+ * @param {string} color - Colors from dashboard.
+ * @returns A curved line showing the evolution of user's activity through the week.
+ */
 
 const Duration = ({  userId, color }) => {
     const [data, setData] = useState();
 
+	// data are fetched on each userId change.
 	useEffect(() => {
 		async function get() {
 			const response = await getData("USER_AVERAGE_SESSIONS", userId);
@@ -15,10 +22,24 @@ const Duration = ({  userId, color }) => {
 		get();
 	}, [userId]);
 
+
+	/**
+	 * Given a number, return the corresponding day of the week
+	 * @param {number} num
+	 * @returns The letter day of the week.
+	 */
+
 	function weekDays(num) {
 		const week = ["L", "M", "M", "J", "V", "S", "D"];
 		return week[+num - 1];
 	}
+
+		/**
+	 * This function is a React component that builds a custom Tooltip.
+	 * @param {array} payload - Array of objects feeding the Tooltip.
+	 * @returns A div with a class of custom-tooltip and a style of background: white and padding: 1px
+	 * 5px.
+	 */
 
 	function CustomTooltip({ payload }) {
 		if (payload && payload.length) {
@@ -34,6 +55,12 @@ const Duration = ({  userId, color }) => {
 		}
 		return <div>... waiting for data</div>;
 	}
+
+	/**
+	 * It creates a rectangle that is the size of the cursor.
+	 * @param {object} props - The properties of the cursor.
+	 * @returns A custom cursor.
+	 */
 
 	function CustomCursor(props) {
 		if (props) {
@@ -84,7 +111,6 @@ const Duration = ({  userId, color }) => {
 							axisLine={false}
 						/>
 						<YAxis
-							// dataKey="sessionLength"
 							padding={{ top: 0, bottom: 0 }}
 							type="number"
 							domain={["dataMin -10", "dataMax +10"]}
@@ -100,7 +126,7 @@ const Duration = ({  userId, color }) => {
 							iconSize={0}
 							content={() => (
 								<div
-								    className="legend_text"
+									className="legend_text"
 									style={{
 										color: "white",
 										marginTop: "-10px",
@@ -123,19 +149,14 @@ const Duration = ({  userId, color }) => {
 							scale="band"
 							stroke="white"
 							strokeWidth={2}
-							// legendType="none"
 							dot={false}
 							activeDot={{
 								fill: "white",
-								// width: "50px",
-								// strikethroughPosition: "true",
-								// stroke: "white",
 								strokeOpacity: ".5",
 								strokeWidth: "10",
 								r: 4,
 							}}
 						/>
-						{/* <Bar dataKey="sessionLength" /> */}
 					</LineChart>
 				</ResponsiveContainer>
 			)}
@@ -145,6 +166,7 @@ const Duration = ({  userId, color }) => {
 
 export default Duration;
 
-Duration.proptype = {
+Duration.propTypes = {
 	userId: PropTypes.number.isRequired,
+	color: PropTypes.object.isRequired
 };
