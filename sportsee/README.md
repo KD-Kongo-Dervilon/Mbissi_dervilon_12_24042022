@@ -56,6 +56,10 @@ To install the latest version on npm locally and save it in your package's packa
 
 npm install --save-dev jsdoc
 
+I add jsdocs to typical javascript project by adding a script to package.json
+
+and add a config file .jsdoc.conf.json
+
 this generates the docs in a folder ./docs in the root of the project.
 
 npm run docs
