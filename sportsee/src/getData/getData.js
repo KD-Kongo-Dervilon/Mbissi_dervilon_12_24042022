@@ -4,9 +4,10 @@ import axios from "axios";
 
 /**
  * It fetches data either from the mockedData or the API and returns it.
- * @modify .env - Set MOCKED_DATA to true || false
+ * @modify .env - Set MOCKED_DATA to 'true' || 'false' in order to use mockedData or Axios requests
  * @param requestTarget - The name of the type of data you want to request from the API.
  * @param userId - The user ID of the user you want to get data for.
+ * @access localStorage - Fetched data are stored in localStorage to provide better access for next time
  * @returns The data for the user.
  */
 
@@ -28,30 +29,37 @@ async function getData(requestTarget, userId) {
     console.log(`Data is taken from ${mockedEnv === "true" ? "MOCKED_DATA" : "BackEnd database with Axios" }.`)
 
 
-    if (mockedEnv === 'true') {
-        //console.log('FROM MOCKED DATA')
-        usersData = await new Promise((resolve) => resolve(mockedData[requestTarget]))
-        data = {data: await usersData.filter(user => user.id ? user.id === userId : user.userId === userId)[0]}
-    } else {
-        //console.log('FROM AXIOS')
-        try {
-            usersData = await axios({
-                method: 'get',
-                baseURL: apiURL,
-                url: apiTarget,
-                responseType: "stream"
-            })
-            
-            data = await usersData.data
-        } catch (error) {
-            console.log('Error fetching data:', error)
-            alert('Une erreur est survenue : échec de récupération des données utilisateur.')
+    try {
+        if (localStorage.getItem(`sportSee-${userId}-${requestTarget}`)) {
+            console.log('Data is taken from your localStorage.')
+            data = JSON.parse(localStorage.getItem(`sportSee-${userId}-${requestTarget}`))
+        } else {
+            console.log(`Data is taken from ${mockedEnv === "true" ? "MOCKED_DATA" : "BackEnd database with Axios"}.`)
+            if (mockedEnv === 'true') {
+                usersData = await new Promise((resolve) => resolve(mockedData[requestTarget]))
+                data = { data: await usersData.filter(user => user.id ? user.id === userId : user.userId === userId)[0] }
+                localStorage.setItem(`sportSee-${userId}-${requestTarget}`, JSON.stringify(data))
+            } else {
+                try {
+                    usersData = await axios({
+                        method: 'get',
+                        baseURL: apiURL,
+                        url: apiTarget,
+                        responseType: "stream"
+                    })
+                    data = await usersData.data
+                    localStorage.setItem(`sportSee-${userId}-${requestTarget}`, JSON.stringify(data))
+                } catch (error) {
+                    console.log('Erreur axios:', error)
+                }
+            }
         }
-    }
 
-    // console.log('DATA from getData:', data)
     return data
-
+    } catch (error) {
+        console.log('Erreur de récupération des données utilisateur:', error)
+        alert('Une erreur est survenue: Utilisateur non reconnu.')
+    }
 }
 
 export default getData;

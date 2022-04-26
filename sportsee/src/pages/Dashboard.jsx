@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import getData from '../getData/getData';
 import Weight from '../components/dashboard/Weight';
 import Duration from '../components/dashboard/Duration';
+import RadarComp from '../components/dashboard/RadarComp';
 
 
 
@@ -35,7 +36,7 @@ const Dashboard = ({ userId }) => {
             <div className="dashboard_graphs">
             <Weight userId={userId} />
 				<Duration userId={userId} />
-				<Radar userId={userId} />
+				<RadarComp userId={userId} color={color} />
 				<Score data={mainData?.todayScore} />
 				<Weight userId={userId} color={color} />
 				<Duration userId={userId} color={color} />

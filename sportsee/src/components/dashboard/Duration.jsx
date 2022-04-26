@@ -40,12 +40,12 @@ const Duration = ({  userId, color }) => {
 			const { points, width, height } = props;
 			const { x, y } = points[0];
 
-			console.log("props", x,y,width,height);
+			// console.log("props", x,y,width,height);
 			return (
 				<Rectangle
-					fill= {color.dark_red}
+					fill={color.dark_red}
 					x={x}
-					y={y -30}
+					y={y - 30}
 					width={width}
 					height={height * 2}
 				/>
@@ -72,23 +72,22 @@ const Duration = ({  userId, color }) => {
 							content={<CustomTooltip />}
 							animationEasing="ease-out"
 							cursor={<CustomCursor />}
-							// active
 						/>
 						<XAxis
 							dataKey="day"
 							tickFormatter={weekDays}
 							tick={{ fill: "white", opacity: ".7" }}
 							tickLine={false}
-							tickMargin={20}
+							tickMargin={15}
 							interval="preserveStartEnd"
-							gap={5}
+							// gap={1}
 							axisLine={false}
 						/>
 						<YAxis
 							// dataKey="sessionLength"
 							padding={{ top: 0, bottom: 0 }}
 							type="number"
-							domain={["dataMin ", "dataMax"]}
+							domain={["dataMin -10", "dataMax +10"]}
 							allowDataOverflow={true}
 							tickLine={false}
 							axisLine={false}
@@ -103,8 +102,9 @@ const Duration = ({  userId, color }) => {
 								<div
 									style={{
 										color: "white",
+										marginTop: "-10px",
 										marginLeft: "20px",
-										fontSize: "18px",
+										fontSize: "1.4vw",
 										opacity: ".5",
 										position: "absolute",
 										top: "0",
@@ -118,7 +118,7 @@ const Duration = ({  userId, color }) => {
 							margin={{ left: 20 }}
 						/>
 						<Line
-							type="monotone"
+							type="natural"
 							dataKey="sessionLength"
 							scale="band"
 							stroke="white"

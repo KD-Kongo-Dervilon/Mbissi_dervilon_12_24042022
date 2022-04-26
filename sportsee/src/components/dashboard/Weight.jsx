@@ -47,7 +47,7 @@ const Weight = ({ userId, color  }) => {
 					style={{
 						position: "absolute",
 						left: "0",
-						fontSize: "18px",
+						fontSize: "1.4vw",
 						color: color.dark_grey,
 					}}
 				>
